@@ -24,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <SWRContfigContext>{children}</SWRContfigContext>
                     </main>
                 </AuthContext>
+                <div id="portal" />
             </body>
         </html>
     );

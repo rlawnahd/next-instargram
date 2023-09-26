@@ -26,6 +26,7 @@ export default {
       ],
       validation: (Rule) => Rule.unique(),
     },
+
     {
       title: 'Comments',
       name: 'comments',
