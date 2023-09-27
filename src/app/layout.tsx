@@ -8,7 +8,7 @@ import SWRContfigContext from '@/context/SWRConfigContext';
 const openSans = Open_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Mongstagram',
+    title: { default: 'Mongstagram', template: '%s | Mongstagram' },
     description: 'Mongstagram',
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             <Navbar />
                         </div>
                     </header>
-                    <main className="w-full flex justify-center ">
+                    <main className="w-full flex justify-center max-w-screen-xl mx-auto ">
                         <SWRContfigContext>{children}</SWRContfigContext>
                     </main>
                 </AuthContext>
