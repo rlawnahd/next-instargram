@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import React, { cache } from 'react';
 
+// 이해가 안되는 부분..
 // export async function getGenerateStaticParams({ params }: { params: { slug: string[] } }) {
 //     const user = await getUserByUsername(params.slug[0]);
 //     return user;
