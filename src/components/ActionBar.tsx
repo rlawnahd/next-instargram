@@ -1,7 +1,10 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import HeartIcon from './ui/icons/HeartIcon';
 import BookMarkIcon from './ui/icons/BookMarkIcon';
 import { parseDate } from '@/utils/date';
+import ToggleButton from './ui/ToggleButton';
+import HeartFillIcon from './ui/icons/HeartFillIcon';
 
 type Props = {
     likes: string[];
@@ -11,10 +14,12 @@ type Props = {
 };
 
 export default function ActionBar({ likes, username, text, createdAt }: Props) {
+    const [liked, setLiked] = useState(false);
+    const [bookmarked, setBookmarked] = useState(false);
     return (
         <>
-            {' '}
             <div className="flex justify-between my-2 px-4">
+                <ToggleButton toggled={liked} onToggle={setLiked} onIcon={<HeartFillIcon />} offIcon={<HeartIcon />} />
                 <HeartIcon />
                 <BookMarkIcon />
             </div>
