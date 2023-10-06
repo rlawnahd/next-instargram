@@ -6,10 +6,10 @@ import { GridLoader } from 'react-spinners';
 import useSWR from 'swr';
 import PostListCard from './PostListCard';
 import GridSpinner from './ui/GridSpinner';
+import usePosts from '@/hooks/posts';
 
 export default function PostList() {
-    const { data: posts, isLoading: loading, error } = useSWR<SimplePost[]>('/api/posts');
-    console.log(posts);
+    const { posts, isLoading: loading, error } = usePosts();
     return (
         <section>
             {loading && (

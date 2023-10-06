@@ -17,23 +17,23 @@ export async function getFollowingPostsOf(username: string) {
         .fetch(
             `*[_type == 'post' && author->username == "${username}" || author._ref in *[_type == 'user' && username == "${username}"].following[]._ref] | order(_createdAt desc){${simplePostsProjection}}`
         )
-        .then((posts) => posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) })));
+        .then(mapPosts);
 }
 export async function getPost(id: string) {
     return client
         .fetch(
-            `*[_type == 'post' && _id == "${id}"][0]{
+            `*[_type == "post" && _id == "${id}"][0]{
         ...,
-        "username":author->username,
-        "userImage":author->image,
-        "image":photo,
-        "likes":likes[]->username,
-        comments[]{comment,"username":author->username,"image":author->image,},
+        "username": author->username,
+        "userImage": author->image,
+        "image": photo,
+        "likes": likes[]->username,
+        comments[]{comment, "username": author->username, "image": author->image},
         "id":_id,
-        "createdAt":_createdAt,
-    }`
+        "createdAt":_creatdAt
+      }`
         )
-        .then(mapPosts);
+        .then((post) => ({ ...post, image: urlFor(post.image) }));
 }
 
 export async function getPostsOf(username: string) {
@@ -66,6 +66,7 @@ export async function getSavedPostsOf(username: string) {
 function mapPosts(posts: SimplePost[]) {
     return posts.map((post: SimplePost) => ({
         ...post,
+        likes: post.likes ?? [],
         image: urlFor(post.image),
     }));
 }
@@ -82,5 +83,5 @@ export async function dislikePost(postId: string, userId: string) {
     return client
         .patch(postId)
         .unset([`likes[_ref=="${userId}"]`])
-        .commit({ autoGenerateArrayKeys: true });
+        .commit();
 }
