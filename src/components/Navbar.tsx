@@ -31,7 +31,7 @@ const menu = [
 ];
 
 export default function Navbar() {
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
     const pathname = usePathname();
     const user = session?.user;
     return (

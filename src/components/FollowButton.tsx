@@ -1,7 +1,6 @@
 'use client';
-import { HomeUser, ProfileUser } from '@/model/user';
+import { ProfileUser } from '@/model/user';
 import React from 'react';
-import useSWR from 'swr';
 import Button from './ui/Button';
 import useMe from '@/hooks/me';
 

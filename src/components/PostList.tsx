@@ -1,15 +1,12 @@
 'use client';
 
-import { SimplePost } from '@/model/post';
 import React from 'react';
-import { GridLoader } from 'react-spinners';
-import useSWR from 'swr';
 import PostListCard from './PostListCard';
 import GridSpinner from './ui/GridSpinner';
 import usePosts from '@/hooks/posts';
 
 export default function PostList() {
-    const { posts, isLoading: loading, error } = usePosts();
+    const { posts, isLoading: loading } = usePosts();
     return (
         <section>
             {loading && (

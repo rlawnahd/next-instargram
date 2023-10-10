@@ -6,7 +6,6 @@ type Props = {
 
 import { ProfileUser } from '@/model/user';
 import React, { useState } from 'react';
-import useSWR from 'swr';
 import PostIcon from './ui/icons/PostIcon';
 import BookMarkIcon from './ui/icons/BookMarkIcon';
 import HeartIcon from './ui/icons/HeartIcon';
