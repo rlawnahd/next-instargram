@@ -3,13 +3,18 @@ import React from 'react';
 import useSWR from 'swr';
 import GridSpinner from './ui/GridSpinner';
 import PostGridCard from './PostGridCard';
+import usePosts from '@/hooks/posts';
 type Props = {
     username: string;
     query: string;
 };
-export default function PostGrid({ username, query }: Props) {
-    const { data: posts, isLoading, error } = useSWR<SimplePost[]>(`/api/users/${username}/${query}`);
+type DummyProps = Props & {
+    posts: SimplePost[];
+    isLoading: boolean;
+};
 
+export default function PostGrid({ username, query }: Props) {
+    const { posts, isLoading } = usePosts(`/api/users/${username}/${query}`);
     return (
         <div className="w-full text-center">
             {isLoading && <GridSpinner />}

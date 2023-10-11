@@ -21,7 +21,6 @@ export default async function UserPage({ params: { username } }: Props) {
     //사용자의 프로필 이미지와 정보
     //3개의 탭(posts,likes,bookmarks)
     const user = await getUser(username);
-
     if (!user) {
         notFound();
     }

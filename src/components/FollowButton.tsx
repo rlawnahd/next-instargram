@@ -1,18 +1,47 @@
 'use client';
 import { ProfileUser } from '@/model/user';
-import React from 'react';
+import React, { useState, useTransition } from 'react';
 import Button from './ui/Button';
 import useMe from '@/hooks/me';
+import { useRouter } from 'next/navigation';
+import { PulseLoader } from 'react-spinners';
 
 type Props = {
     user: ProfileUser;
 };
 export default function FollowButton({ user }: Props) {
     const { username } = user;
-    const { user: loggedInUser } = useMe();
+    const { user: loggedInUser, toggleFollow } = useMe();
+    const router = useRouter();
+    const [isPending, startTransition] = useTransition();
+    const [isFecting, setIsFecting] = useState(false);
 
+    const isUpdating = isPending || isFecting;
     const showButton = loggedInUser && loggedInUser.username !== username;
     const following = loggedInUser && loggedInUser.following.find((item) => item.username === username);
     const text = following ? 'Unfollow' : 'Follow';
-    return <>{showButton && <Button text={text} onClick={() => {}} red={text === 'Unfollow'} />}</>;
+    const handleFollow = async () => {
+        setIsFecting(true);
+
+        await toggleFollow(user.id, !following);
+        setIsFecting(false);
+        startTransition(() => {
+            router.refresh();
+        });
+    };
+
+    return (
+        <>
+            {showButton && (
+                <div className="relative">
+                    {isUpdating && (
+                        <div className="absolute z-20 inset-0 flex justify-center items-center">
+                            <PulseLoader size={6} />
+                        </div>
+                    )}
+                    <Button disabled={isUpdating} text={text} onClick={handleFollow} red={text === 'Unfollow'} />
+                </div>
+            )}
+        </>
+    );
 }
