@@ -12,7 +12,6 @@ export default function UserSearch() {
     const { data: users, isLoading, error } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
-        console.log('submit');
     };
     return (
         <section className="w-full max-w-2xl my-4 flex flex-col items-center">

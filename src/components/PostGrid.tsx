@@ -13,8 +13,8 @@ type DummyProps = Props & {
     isLoading: boolean;
 };
 
-export default function PostGrid({ username, query }: Props) {
-    const { posts, isLoading } = usePosts(`/api/users/${username}/${query}`);
+export default function PostGrid() {
+    const { posts, isLoading } = usePosts();
     return (
         <div className="w-full text-center">
             {isLoading && <GridSpinner />}

@@ -10,6 +10,7 @@ import PostIcon from './ui/icons/PostIcon';
 import BookMarkIcon from './ui/icons/BookMarkIcon';
 import HeartIcon from './ui/icons/HeartIcon';
 import PostGrid from './PostGrid';
+import { CacheKeysContext } from '@/context/CacheKeysContext';
 const tabs = [
     {
         type: 'posts',
@@ -42,7 +43,9 @@ export default function UserPosts({ user: { username } }: Props) {
                     </li>
                 ))}
             </ul>
-            <PostGrid username={username} query={query} />
+            <CacheKeysContext.Provider value={{ postsKey: `/api/users/${username}/${query}` }}>
+                <PostGrid />
+            </CacheKeysContext.Provider>
         </section>
     );
 }
