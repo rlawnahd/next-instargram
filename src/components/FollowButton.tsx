@@ -14,17 +14,18 @@ export default function FollowButton({ user }: Props) {
     const { user: loggedInUser, toggleFollow } = useMe();
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
-    const [isFecting, setIsFecting] = useState(false);
+    const [isFetching, setIsFetching] = useState(false);
+    const isUpdating = isPending || isFetching;
 
-    const isUpdating = isPending || isFecting;
     const showButton = loggedInUser && loggedInUser.username !== username;
     const following = loggedInUser && loggedInUser.following.find((item) => item.username === username);
+
     const text = following ? 'Unfollow' : 'Follow';
     const handleFollow = async () => {
-        setIsFecting(true);
+        setIsFetching(true);
 
         await toggleFollow(user.id, !following);
-        setIsFecting(false);
+        setIsFetching(false);
         startTransition(() => {
             router.refresh();
         });

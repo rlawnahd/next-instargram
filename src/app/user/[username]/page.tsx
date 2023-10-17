@@ -10,7 +10,6 @@ import React, { cache } from 'react';
 //     const user = await getUserByUsername(params.slug[0]);
 //     return user;
 // }
-
 type Props = {
     params: {
         username: string;
@@ -24,7 +23,7 @@ export default async function UserPage({ params: { username } }: Props) {
     if (!user) {
         notFound();
     }
-
+    console.log(user);
     return (
         <section className="w-full">
             <UserProfile user={user} />

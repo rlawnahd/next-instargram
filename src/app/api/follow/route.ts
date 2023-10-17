@@ -12,9 +12,9 @@ export async function PUT(req: NextRequest) {
         return new Response('Unauthorized', { status: 401 });
     }
 
-    const { id: targetId, isFollow } = await req.json();
+    const { id: targetId, follow: isFollow } = await req.json();
 
-    if (!targetId || follow === undefined) {
+    if (!targetId || isFollow === undefined) {
         return new Response('Bad Request', { status: 400 });
     }
 
