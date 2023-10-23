@@ -1,11 +1,18 @@
+'use client';
 import React from 'react';
 import Avatar from './ui/Avatar';
 import { AuthUser } from '@/model/user';
+import useBearStore from '@/utils/store';
 
 type Props = {
     user: AuthUser;
 };
 export default function SideBar({ user: { name, username, image } }: Props) {
+    const { bears, upBear, bearReset } = useBearStore((state) => ({
+        bears: state.bears,
+        upBear: state.increase,
+        bearReset: state.bearReset,
+    }));
     return (
         <>
             <div className="flex items-center">
@@ -19,6 +26,28 @@ export default function SideBar({ user: { name, username, image } }: Props) {
                 About , Help , Press , API , Jobs , Privacy , Terms , Locations , Top Accounts , Hashtags , Language
             </p>
             <p className="font-bold text-sm mt-8 text-neutral-500">@CopyRight MONGSTAGRAM from METAL</p>
+            <div className="card">
+                <center>
+                    <h2>count is {bears}</h2>
+                </center>
+                <center>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            upBear(100);
+                        }}
+                    >
+                        증가
+                    </button>
+                    <button
+                        onClick={() => {
+                            bearReset();
+                        }}
+                    >
+                        리셋
+                    </button>
+                </center>
+            </div>
         </>
     );
 }

@@ -6,7 +6,6 @@ import { PropagateLoader } from 'react-spinners';
 import Avatar from './ui/Avatar';
 import ScrollableBar from './ui/ScrollableBar';
 import useMe from '@/hooks/me';
-
 export default function FollowingBar() {
     const { user, isLoading: loading, error } = useMe();
     const users = user?.following;
