@@ -3,7 +3,7 @@ import { AuthUser } from '@/model/user';
 import React, { useRef, useState } from 'react';
 import PostUserAvatar from './PostUserAvatar';
 import FilesIcon from './ui/icons/FilesIcon';
-import Button from './ui/Button';
+import Button from './ui/SButton';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import GridSpinner from './ui/GridSpinner';

@@ -1,7 +1,7 @@
 'use client';
 import { ProfileUser } from '@/model/user';
 import React, { useState, useTransition } from 'react';
-import Button from './ui/Button';
+import Button from './ui/SButton';
 import useMe from '@/hooks/me';
 import { useRouter } from 'next/navigation';
 import { PulseLoader } from 'react-spinners';
